@@ -24,10 +24,10 @@
             text="Темно-бронзовая медаль в память войны 1853-1856 годов на ленте ордена Андрея Первозванного для ношения на груди" />
         </td>
         <td>
-          <SimapleCell text="Жалованье 450 рублей; Столовых 200 рублей; Итого 650 рублей" />
+          <SimapleCell v-for="item in items" :text="item" />
         </td>
         <td>
-          <SimapleCell text="Не имеет" />
+          <SimapleCell v-for="item in items" :text="item" />
         </td>
         <td>
           <SimapleCell text="Женат на Марии Яковлевой, имеет дочерей: - Клавдия, 02.11.1893 - Серафима, 23.06.1858" />
@@ -64,6 +64,11 @@ export default {
     ActivityCell,
     FullNameCell,
     SimapleCell
+  },
+  data() {
+    return {
+      items: [1, 2, 3, 4]
+    }
   }
 }
 </script>
