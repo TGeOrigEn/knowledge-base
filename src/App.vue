@@ -14,38 +14,38 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
+      <tr v-for="person in persons">
         <td>
-          <FullNameCell name="Алексей" surname="Гурьев" patronymic="Васильевич" yearBirth="1842" religion="православное"
-            origin="из духовного звания" />
+          <FullNameCell :name="person.fullName.name" :surname="person.fullName.surname"
+            :patronymic="person.fullName.patronymic" :yearBirth="person.fullName.yearBirth"
+            :religion="person.fullName.religion" :origin="person.fullName.origin" />
         </td>
         <td>
-          <SimapleCell
-            text="Темно-бронзовая медаль в память войны 1853-1856 годов на ленте ордена Андрея Первозванного для ношения на груди" />
+          <SimapleCell :text="person.awards" />
         </td>
         <td>
-          <SimapleCell :text="'Жалованье 450 рублей Столовых 200 рублей Итого 650 рублей'" />
+          <SimapleCell :text="person.salary" />
         </td>
         <td>
-          <SimapleCell :text="'Не имеет'" />
+          <SimapleCell :text="person.property" />
         </td>
         <td>
-          <SimapleCell text="Женат на Марии Яковлевой, имеет дочерей: - Клавдия, 02.11.1893 - Серафима, 23.06.1858" />
+          <SimapleCell :text="person.family" />
         </td>
         <td>
-          <ActivityCell activity="Научная деятельность"
-            description="сформировал основы чего-то и оформил как научный труд" />
+          <ActivityCell v-for="item in person.activity" :activity="item.activity" :description="item.description" />
         </td>
         <td>
-          <EducationCell level="Высшее" place="Воронежская духовная" establishment="Семинария" />
+          <EducationCell :level="person.education.level" :place="person.education.place"
+            :establishment="person.education.establishment" />
         </td>
         <td>
-          <CareerCell v-for="item in items" :startDate="'5.04.1849'" :endDate="'29.09.1850'" :career="'Регистратора'"
-            :place="'Томская губерния'" />
+          <CareerCell v-for="item in person.career" :startDate="item.startDate" :endDate="item.endDate"
+            :career="item.career" :place="item.place" />
         </td>
         <td>
-          <RankCell v-for="item in items" :startDate="'30.09.1854'" :endDate="'28.11.1857'" :degree="'VI'"
-            :rank="'Статский советник'" />
+          <RankCell v-for="item in person.rank" :startDate="item.startDate" :endDate="item.endDate"
+            :degree="item.degree" :rank="item.rank" />
         </td>
       </tr>
     </tbody>
@@ -61,6 +61,8 @@ import SimapleCell from './components/SimpleCell.vue';
 import EducationCell from './components/EducationCell.vue';
 import ActivityCell from './components/ActivityCell.vue';
 
+import P from './entities/Person'
+
 export default {
   components: {
     PreformattedCell,
@@ -73,7 +75,28 @@ export default {
   },
   data() {
     return {
-      items: [1, 2, 3, 4]
+      persons: [new P.Person(
+        new P.FullName("Гурьев", "Алексей", "Васильевич", "1842", "православное", "из духовного звания"),
+        "Темно-бронзовая медаль в память войны 1853-1856 годов на ленте ордена Андрея Первозванного для ношения на груди",
+        "Жалованье 450 рублей Столовых 200 рублей Итого 650 рублей",
+        "Не имеет",
+        "Женат на Марии Яковлевой, имеет дочерей: - Клавдия, 02.11.1893 - Серафима, 23.06.1858",
+        [new P.Activity("Научная деятельность", "сформировал основы чего-то и оформил как научный труд", "МЕСТО")],
+        new P.Education("Высшее", "Семинария", "Воронежская духовная"),
+        [new P.Career("5.04.1849", "29.09.1850", "Регистратор", "Томская губерния")],
+        [new P.Rank("5.04.1849", "29.09.1850", "VI", "Статский советник")],
+      ),
+      new P.Person(
+        new P.FullName("Гурьев", "Алексей", "Васильевич", "1842", "православное", "из духовного звания"),
+        "Темно-бронзовая медаль в память войны 1853-1856 годов на ленте ордена Андрея Первозванного для ношения на груди",
+        "Жалованье 450 рублей Столовых 200 рублей Итого 650 рублей",
+        "Не имеет",
+        "Женат на Марии Яковлевой, имеет дочерей: - Клавдия, 02.11.1893 - Серафима, 23.06.1858",
+        [new P.Activity("Научная деятельность", "сформировал основы чего-то и оформил как научный труд", "МЕСТО")],
+        new P.Education("Высшее", "Семинария", "Воронежская духовная"),
+        [new P.Career("5.04.1849", "29.09.1850", "Регистратор", "Томская губерния")],
+        [new P.Rank("5.04.1849", "29.09.1850", "VI", "Статский советник")],
+      )]
     }
   }
 }
