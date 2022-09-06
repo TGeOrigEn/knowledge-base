@@ -1,5 +1,6 @@
 <template>
   <table>
+    <button @click="add"></button>
     <thead>
       <tr>
         <th>ФИО, год рождения, происхождение, вероисповедание</th>
@@ -53,6 +54,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 import RankCell from './components/RankCell.vue';
 import CareerCell from './components/CareerCell.vue';
 import PreformattedCell from './components/PreformattedCell.vue';
@@ -97,6 +99,13 @@ export default {
         [new P.Career("5.04.1849", "29.09.1850", "Регистратор", "Томская губерния")],
         [new P.Rank("5.04.1849", "29.09.1850", "VI", "Статский советник")],
       )]
+    }
+  },
+  methods: {
+    async add() {
+      const article = { name: "OOOO", surname: "OOOO" };
+      axios.post("http://localhost:9090/api/person", article)
+        .then(response => this.articleId = response.data.id);
     }
   }
 }

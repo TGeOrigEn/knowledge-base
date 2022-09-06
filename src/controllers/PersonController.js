@@ -10,7 +10,6 @@ class PersonController {
     }
 
     async getPersons(req, res) {
-        
     }
 
     async getPerson(req, res) {
