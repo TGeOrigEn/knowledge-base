@@ -2,9 +2,9 @@ create TABLE person(
     id SERIAL PRIMARY KEY,
     full_name_id INTEGER,
     education_id INTEGER,
+    property TEXT,
     awards TEXT,
     salary TEXT,
-    property TEXT,
     family TEXT,
     FOREIGN KEY (full_name_id) REFERENCES full_name (id),
     FOREIGN KEY (education_id) REFERENCES education (id)
