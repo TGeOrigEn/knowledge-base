@@ -13,6 +13,7 @@
 </template>
 
 <script>
+//religion: Православное, Римско-католическое, Евангельско-лютеранское, Иное
 export default {
   props: {
     name: {

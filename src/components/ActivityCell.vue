@@ -6,6 +6,7 @@
 </template>
   
 <script>
+//activity: Научная, Культурно-просветительская, Благотворительная
 export default {
     props: {
         activity: {
