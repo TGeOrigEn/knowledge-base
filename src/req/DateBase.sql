@@ -18,7 +18,7 @@ create TABLE full_name(
     patronymic VARCHAR(255),
     yearBirth VARCHAR(255),
     religion VARCHAR(255),
-    origin VARCHAR(255),
+    origin VARCHAR(255)
 );
 
 create TABLE activity(
@@ -35,11 +35,12 @@ create TABLE education(
     person_id INTEGER,
     level VARCHAR(255),
     establishment VARCHAR(255),
-    place VARCHAR(255),
+    place VARCHAR(255)
 );
 
 create TABLE career(
     id SERIAL PRIMARY KEY,
+    person_id INTEGER,
     startDate INTEGER,
     endDate VARCHAR(255),
     career VARCHAR(255),
@@ -49,6 +50,7 @@ create TABLE career(
 
 create TABLE rank(
     id SERIAL PRIMARY KEY,
+    person_id INTEGER,
     startDate INTEGER,
     endDate VARCHAR(255),
     degree VARCHAR(255),
