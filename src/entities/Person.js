@@ -13,7 +13,8 @@ class Person {
 }
 
 class FullName {
-    constructor(surname, name, patronymic, yearBirth, religion, origin) {
+    constructor(id, surname, name, patronymic, yearBirth, religion, origin) {
+        this.id = id;
         this.surname = surname;
         this.name = name;
         this.patronymic = patronymic;
