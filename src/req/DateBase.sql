@@ -30,12 +30,12 @@ create TABLE person(
 
 create TABLE activity(
     id SERIAL PRIMARY KEY,
+    person_id INTEGER,
     activity VARCHAR(255),
     description VARCHAR(255),
-    place VARCHAR(255),   
+    place VARCHAR(255),
+    FOREIGN KEY (person_id) REFERENCES person (id)
 );
-
-
 
 create TABLE career(
     id SERIAL PRIMARY KEY,
@@ -56,3 +56,11 @@ create TABLE rank(
     rank VARCHAR(255),   
     FOREIGN KEY (person_id) REFERENCES person (id)
 );
+
+
+DROP TABLE full_name CASCADE;
+DROP TABLE education CASCADE;
+DROP TABLE person CASCADE;
+DROP TABLE activity CASCADE;
+DROP TABLE career CASCADE;
+DROP TABLE rank CASCADE;
