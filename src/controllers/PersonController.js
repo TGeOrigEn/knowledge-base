@@ -28,8 +28,8 @@ class PersonController {
             'values ($1, $2, $3, $4, $5) RETURNING *;', [newPerson.rows[0].id, element.startDate, element.endDate, element.degree, element.rank]);
         });
 
-        await database.query('UPDATE person SET education = ($2) WHERE id = ($1);', [ newPerson.rows[0].id, newEducation.rows[0].id ]);
-        await database.query('UPDATE person SET fullName = ($2) WHERE id = ($1);', [ newPerson.rows[0].id, newFullName.rows[0].id ]);
+        await database.query('UPDATE person SET education_id = ($2) WHERE id = ($1);', [ newPerson.rows[0].id, newEducation.rows[0].id ]);
+        await database.query('UPDATE person SET full_name_id = ($2) WHERE id = ($1);', [ newPerson.rows[0].id, newFullName.rows[0].id ]);
 
         res.json(newPerson.rows[0]);
     }
