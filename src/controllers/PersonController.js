@@ -10,6 +10,8 @@ class PersonController {
     }
 
     async getPersons(req, res) {
+        const persons = await database.query('SELECT * FROM test');
+        res.json(persons.rows);
     }
 
     async getPerson(req, res) {
