@@ -41,6 +41,7 @@ class PersonController {
 
     async getPerson(req, res) {
         const id = req.params.id;
+        console.log(id);
         const person = await database.query('SELECT * FROM person WHERE id = $1;'[id]);
         res.json(person.rows[0]);
     }
