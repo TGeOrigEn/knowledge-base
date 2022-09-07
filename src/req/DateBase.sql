@@ -40,7 +40,7 @@ create TABLE activity(
 create TABLE career(
     id SERIAL PRIMARY KEY,
     person_id INTEGER,
-    startDate INTEGER,
+    startDate VARCHAR(255),
     endDate VARCHAR(255),
     career VARCHAR(255),
     place VARCHAR(255),   
@@ -50,7 +50,7 @@ create TABLE career(
 create TABLE rank(
     id SERIAL PRIMARY KEY,
     person_id INTEGER,
-    startDate INTEGER,
+    startDate VARCHAR(255),
     endDate VARCHAR(255),
     degree VARCHAR(255),
     rank VARCHAR(255),   
