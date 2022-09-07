@@ -35,12 +35,12 @@ class PersonController {
     }
 
     async getPersons(req, res) {
-        const persons = await database.query('SELECT * FROM person');
+        const persons = await database.query('SELECT * FROM person;');
         res.json(persons.rows);
     }
 
     async getPerson(req, res) {
-        const persons = await database.query('SELECT * FROM person WHERE id = ($1)' [req.params.id]);
+        const persons = await database.query('SELECT * FROM person WHERE id = $1;' [req.params.id]);
         res.json(persons.rows[0]);
     }
 
