@@ -1,14 +1,14 @@
 const express = require('express');
 const personRouter = require('./src/routes/PersonRouter');
 
-const PORT = process.env.PORT || 9090;
+const PORT = process.env.PORT || 8085;
 
 const app = express();
 
 app.use(function (req, res, next) {
 
     // Website you wish to allow to connect
-    res.setHeader('Access-Control-Allow-Origin', 'http://localhost:8081');
+    res.setHeader('Access-Control-Allow-Origin', 'http://gov-elite-bd.ru');
 
     // Request methods you wish to allow
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -27,4 +27,4 @@ app.use(function (req, res, next) {
 app.use(express.json());
 app.use('/api', personRouter);
 
-app.listen(PORT, () => console.log("server started on port " + PORT));
+app.listen(PORT, '194.87.232.70', () => console.log("server started on port " + PORT));

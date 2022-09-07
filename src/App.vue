@@ -1,6 +1,7 @@
 <template>
   <table>
-    <!-- <button @click="add"></button> -->
+    <button @click="refresh">Обновить</button>
+    <button @click="create">Создать</button>
     <thead>
       <tr>
         <th>ФИО, год рождения, происхождение, вероисповедание</th>
@@ -102,10 +103,71 @@ export default {
     }
   },
   methods: {
-    async add() {
-      const article = { name: "OOOO", surname: "OOOO" };
-      axios.post("http://localhost:9090/api/person", article)
-        .then(response => this.articleId = response.data.id);
+    async refresh() {
+      axios.get("http://194.87.232.70:8085/api/person")
+        .then(response => console.log(response.data));
+    },
+    async create() {
+      axios.post("http://194.87.232.70:8085/api/person", {
+        family: "",
+        salary: "",
+        awards: "",
+        property: "",
+        fullName: {
+          surname: "",
+          name: "",
+          patronymic: "",
+          yearBirth: "",
+          religion: "",
+          origin: ""
+        },
+        education: {
+          level: "",
+          establishment: "",
+          place: ""
+        },
+        activity: [
+          {
+            activity: "",
+            description: "",
+            place: ""
+          },
+          {
+            activity: "",
+            description: "",
+            place: ""
+          },
+        ],
+        career: [
+          {
+            startDate: "",
+            endDate: "",
+            career: "",
+            place: ""
+          },
+          {
+            startDate: "",
+            endDate: "",
+            career: "",
+            place: ""
+          },
+        ],
+        rank: [
+          {
+            startDate: "",
+            endDate: "",
+            degree: "",
+            rank: ""
+          },
+          {
+            startDate: "",
+            endDate: "",
+            degree: "",
+            rank: ""
+          },
+        ]
+      })
+        .then(response => console.log(response.data));
     }
   }
 }
