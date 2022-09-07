@@ -1,6 +1,7 @@
 <template>
   <table>
-    <button @click="getAll">Обновить</button>
+
+    <button @click="refresh">Обновить</button>
     <button @click="create">Создать</button>
     <thead>
       <tr>
@@ -17,11 +18,11 @@
     </thead>
     <tbody>
       <tr v-for="person in persons">
-        <td>
+        <!-- <td>
           <FullNameCell :name="person.fullName.name" :surname="person.fullName.surname"
             :patronymic="person.fullName.patronymic" :yearBirth="person.fullName.yearBirth"
             :religion="person.fullName.religion" :origin="person.fullName.origin" />
-        </td>
+        </td> -->
         <td>
           <SimapleCell :text="person.awards" />
         </td>
@@ -34,7 +35,7 @@
         <td>
           <SimapleCell :text="person.family" />
         </td>
-        <td>
+        <!-- <td>
           <ActivityCell v-for="item in person.activity" :activity="item.activity" :description="item.description" />
         </td>
         <td>
@@ -48,7 +49,7 @@
         <td>
           <RankCell v-for="item in person.rank" :startDate="item.startDate" :endDate="item.endDate"
             :degree="item.degree" :rank="item.rank" />
-        </td>
+        </td> -->
       </tr>
     </tbody>
   </table>
@@ -66,6 +67,18 @@ import ActivityCell from './components/ActivityCell.vue';
 
 import P from './entities/Person'
 
+// new P.Person(
+//         new P.FullName("1", "Гурьев", "Алексей", "Васильевич", "1842", "православное", "из духовного звания"),
+//         "Темно-бронзовая медаль в память войны 1853-1856 годов на ленте ордена Андрея Первозванного для ношения на груди",
+//         "Жалованье 450 рублей Столовых 200 рублей Итого 650 рублей",
+//         "Не имеет",
+//         "Женат на Марии Яковлевой, имеет дочерей: - Клавдия, 02.11.1893 - Серафима, 23.06.1858",
+//         [new P.Activity("Научная деятельность", "сформировал основы чего-то и оформил как научный труд", "МЕСТО")],
+//         new P.Education("Высшее", "Семинария", "Воронежская духовная"),
+//         [new P.Career("5.04.1849", "29.09.1850", "Регистратор", "Томская губерния")],
+//         [new P.Rank("5.04.1849", "29.09.1850", "VI", "Статский советник")],
+//       )]
+
 export default {
   components: {
     PreformattedCell,
@@ -76,45 +89,41 @@ export default {
     CareerCell,
     RankCell
   },
+  created() {
+    this.refresh();
+  },
   data() {
     return {
-      persons: [new P.Person(
-        new P.FullName("0", "Гурьев", "Алексей", "Васильевич", "1842", "православное", "из духовного звания"),
-        "Темно-бронзовая медаль в память войны 1853-1856 годов на ленте ордена Андрея Первозванного для ношения на груди",
-        "Жалованье 450 рублей Столовых 200 рублей Итого 650 рублей",
-        "Не имеет",
-        "Женат на Марии Яковлевой, имеет дочерей: - Клавдия, 02.11.1893 - Серафима, 23.06.1858",
-        [new P.Activity("Научная деятельность", "сформировал основы чего-то и оформил как научный труд", "МЕСТО")],
-        new P.Education("Высшее", "Семинария", "Воронежская духовная"),
-        [new P.Career("5.04.1849", "29.09.1850", "Регистратор", "Томская губерния")],
-        [new P.Rank("5.04.1849", "29.09.1850", "VI", "Статский советник")],
-      ),
-      new P.Person(
-        new P.FullName("1", "Гурьев", "Алексей", "Васильевич", "1842", "православное", "из духовного звания"),
-        "Темно-бронзовая медаль в память войны 1853-1856 годов на ленте ордена Андрея Первозванного для ношения на груди",
-        "Жалованье 450 рублей Столовых 200 рублей Итого 650 рублей",
-        "Не имеет",
-        "Женат на Марии Яковлевой, имеет дочерей: - Клавдия, 02.11.1893 - Серафима, 23.06.1858",
-        [new P.Activity("Научная деятельность", "сформировал основы чего-то и оформил как научный труд", "МЕСТО")],
-        new P.Education("Высшее", "Семинария", "Воронежская духовная"),
-        [new P.Career("5.04.1849", "29.09.1850", "Регистратор", "Томская губерния")],
-        [new P.Rank("5.04.1849", "29.09.1850", "VI", "Статский советник")],
-      )]
+      persons: []
     }
   },
+  mounted() {
+    this.test();
+  },
   methods: {
-    async getAll() {
-      axios.get("http://194.87.232.70:8085/api/person")
-        .then(response => console.log(response.data));
+
+    test() {
+      this.value++;
     },
+
+    getAll() {
+      let value;
+      axios.get("http://194.87.232.70:8085/api/person")
+        .then(response => value = response.data);
+      return value;
+    },
+
     async getFullName(id) {
-      axios.get("http://194.87.232.70:8085/api/person")
+      axios.get("http://194.87.232.70:8085/api/person/" + id)
         .then(response => console.log(response.data));
     },
+
     async refresh() {
       axios.get("http://194.87.232.70:8085/api/person")
-        .then(response => console.log(response.data));
+        .then(response => this.persons = response.data)
+        .catch(error => console.log(error));
     },
+    
     async create() {
       axios.post("http://194.87.232.70:8085/api/person", {
         family: "",
