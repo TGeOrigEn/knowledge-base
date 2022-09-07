@@ -1,3 +1,21 @@
+create TABLE full_name(
+    id SERIAL PRIMARY KEY,
+    surname VARCHAR(255),
+    name VARCHAR(255),
+    patronymic VARCHAR(255),
+    yearBirth VARCHAR(255),
+    religion VARCHAR(255),
+    origin VARCHAR(255)
+);
+
+create TABLE education(
+    id SERIAL PRIMARY KEY,
+    person_id INTEGER,
+    level VARCHAR(255),
+    establishment VARCHAR(255),
+    place VARCHAR(255)
+);
+
 create TABLE person(
     id SERIAL PRIMARY KEY,
     full_name_id INTEGER,
@@ -10,33 +28,14 @@ create TABLE person(
     FOREIGN KEY (education_id) REFERENCES education (id)
 );
 
-create TABLE full_name(
-    id SERIAL PRIMARY KEY,
-    surname VARCHAR(255),
-    name VARCHAR(255),
-    patronymic VARCHAR(255),
-    yearBirth VARCHAR(255),
-    religion VARCHAR(255),
-    origin VARCHAR(255)
-    FOREIGN KEY (id) REFERENCES person (id)
-);
-
 create TABLE activity(
     id SERIAL PRIMARY KEY,
-    person_id INTEGER,
     activity VARCHAR(255),
     description VARCHAR(255),
     place VARCHAR(255),   
-    FOREIGN KEY (person_id) REFERENCES person (id)
 );
 
-create TABLE education(
-    id SERIAL PRIMARY KEY,
-    level VARCHAR(255),
-    establishment VARCHAR(255),
-    place VARCHAR(255)
-    FOREIGN KEY (id) REFERENCES person (id)
-);
+
 
 create TABLE career(
     id SERIAL PRIMARY KEY,
@@ -56,9 +55,4 @@ create TABLE rank(
     degree VARCHAR(255),
     rank VARCHAR(255),   
     FOREIGN KEY (person_id) REFERENCES person (id)
-);
-
-create TABLE test(
-    name VARCHAR(255),
-    surname
 );

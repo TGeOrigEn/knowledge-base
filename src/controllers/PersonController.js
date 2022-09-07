@@ -7,10 +7,10 @@ class PersonController {
 
         const newPerson = await database.query('INSERT INTO person (property, awards, salary, family) values ($1, $2, $3, $4) RETURNING *;', [property, awards, salary, family]);
 
-        const newFullName = await database.query('INSERT INTO full_name (id, surname, name, patronymic, yearBirth, religion, origin) ' +
+        const newFullName = await database.query('INSERT INTO full_name (person_id, surname, name, patronymic, yearBirth, religion, origin) ' +
             'values ($1, $2, $3, $4, $5, $6, $7) RETURNING *;', [newPerson.rows[0].id, fullName.surname, fullName.name, fullName.patronymic, fullName.yearBirth, fullName.religion, fullName.origin]);
 
-        const newEducation = await database.query('INSERT INTO education (id, level, establishment, place) ' +
+        const newEducation = await database.query('INSERT INTO education (person_id, level, establishment, place) ' +
             'values ($1, $2, $3, $4) RETURNING *;', [newPerson.rows[0].id, education.level, education.establishment, education.place]);
 
         activity.forEach(async element => {
