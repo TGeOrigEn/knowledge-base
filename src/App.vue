@@ -1,6 +1,6 @@
 <template>
   <table>
-    <button @click="add"></button>
+    <!-- <button @click="add"></button> -->
     <thead>
       <tr>
         <th>ФИО, год рождения, происхождение, вероисповедание</th>
