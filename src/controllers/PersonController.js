@@ -40,7 +40,8 @@ class PersonController {
     }
 
     async getPerson(req, res) {
-
+        const persons = await database.query('SELECT * FROM person WHERE id = ($1)' [req.body.id]);
+        res.json(persons.rows[0]);
     }
 
     async updatePerson(req, res) {

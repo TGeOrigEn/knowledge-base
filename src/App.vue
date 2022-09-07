@@ -1,6 +1,6 @@
 <template>
   <table>
-    <button @click="refresh">Обновить</button>
+    <button @click="getAll">Обновить</button>
     <button @click="create">Создать</button>
     <thead>
       <tr>
@@ -103,6 +103,14 @@ export default {
     }
   },
   methods: {
+    async getAll() {
+      axios.get("http://194.87.232.70:8085/api/person")
+        .then(response => console.log(response.data));
+    },
+    async getFullName(id) {
+      axios.get("http://194.87.232.70:8085/api/person")
+        .then(response => console.log(response.data));
+    },
     async refresh() {
       axios.get("http://194.87.232.70:8085/api/person")
         .then(response => console.log(response.data));
