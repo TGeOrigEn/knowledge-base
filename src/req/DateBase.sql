@@ -1,66 +1,79 @@
-create TABLE full_name(
-    id SERIAL PRIMARY KEY,
-    surname VARCHAR(255),
-    name VARCHAR(255),
-    patronymic VARCHAR(255),
-    yearBirth VARCHAR(255),
-    religion VARCHAR(255),
-    origin VARCHAR(255)
+--Личность
+create TABLE Person(
+    --Уникальный номер
+    ID SERIAL IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+    --Фамилия
+    Surname VARCHAR(32) NOT NULL,
+    --Имя
+    Name VARCHAR(32) NOT NULL,
+    --Отчество
+    Patronymic VARCHAR(32) NOT NULL,
+    --Дата рождения
+    DateBirth VARCHAR(16) NOT NULL,
+    --Вероисповедание
+    Religion VARCHAR(64) NOT NULL,
+    --Происхождение
+    Origin VARCHAR(64) NOT NULL,
+    --Уровень образования
+    LevelEducation VARCHAR(64) NOT NULL,
+    --Учебное учреждение
+    EducationalInstitution VARCHAR(64) NOT NULL,
+    --Расположение учебного учреждения
+    LocationEducationalInstitution VARCHAR(64) NOT NULL,
+    --Имущество
+    Property TEXT NOT NULL,
+    --Награды
+    Awards TEXT NOT NULL,
+    --Жалование
+    Salary TEXT NOT NULL,
+    --Семейное положение
+    MaritalStatus TEXT NOT NULL,
+    --Отпуска, отставки, штрафы, суды, военные походы
+    Other TEXT NOT NULL
 );
-
-create TABLE education(
-    id SERIAL PRIMARY KEY,
-    person_id INTEGER,
-    level VARCHAR(255),
-    establishment VARCHAR(255),
-    place VARCHAR(255)
+--Деятельность
+create TABLE Activity(
+    --Уникальный номер
+    ID SERIAL IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+    --Уникальный номер Личности
+    PersonID SERIAL NOT NULL,
+    --Название деятельности
+    Name VARCHAR(32) NOT NULL,
+    --Описание деятельности
+    Description TEXT NOT NULL,
+    --Место деятельности
+    Place VARCHAR(64) NOT NULL,
+    FOREIGN KEY (PersonID) REFERENCES Person (ID)
 );
-
-create TABLE person(
-    id SERIAL PRIMARY KEY,
-    full_name_id INTEGER,
-    education_id INTEGER,
-    property TEXT,
-    awards TEXT,
-    salary TEXT,
-    family TEXT,
-    FOREIGN KEY (full_name_id) REFERENCES full_name (id),
-    FOREIGN KEY (education_id) REFERENCES education (id)
+--Карьера
+create TABLE Career(
+    --Уникальный номер
+    ID SERIAL IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+    --Уникальный номер Личности
+    PersonID SERIAL NOT NULL,
+    --Дата начала
+    StartDate VARCHAR(16),
+    --Дата окончания
+    EndDate VARCHAR(16),
+    --Должность
+    Post VARCHAR(128),
+    --Место работы
+    Place VARCHAR(255),
+    FOREIGN KEY (PersonID) REFERENCES Person (ID)
 );
-
-create TABLE activity(
-    id SERIAL PRIMARY KEY,
-    person_id INTEGER,
-    activity VARCHAR(255),
-    description VARCHAR(255),
-    place VARCHAR(255),
-    FOREIGN KEY (person_id) REFERENCES person (id)
+--Чин
+create TABLE Rank(
+    --Уникальный номер
+    ID SERIAL IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+    --Уникальный номер Личности
+    PersonID SERIAL NOT NULL,
+    --Дата начала
+    StartDate VARCHAR(16),
+    --Дата окончания
+    EndDate VARCHAR(16),
+    --Степень
+    Degree VARCHAR(8),
+    --Название
+    Name VARCHAR(255),
+    FOREIGN KEY (PersonID) REFERENCES Person (ID)
 );
-
-create TABLE career(
-    id SERIAL PRIMARY KEY,
-    person_id INTEGER,
-    startDate VARCHAR(255),
-    endDate VARCHAR(255),
-    career VARCHAR(255),
-    place VARCHAR(255),   
-    FOREIGN KEY (person_id) REFERENCES person (id)
-);
-
-create TABLE rank(
-    id SERIAL PRIMARY KEY,
-    person_id INTEGER,
-    startDate VARCHAR(255),
-    endDate VARCHAR(255),
-    degree VARCHAR(255),
-    rank VARCHAR(255),   
-    FOREIGN KEY (person_id) REFERENCES person (id)
-);
-
-
-DROP TABLE full_name CASCADE;
-DROP TABLE education CASCADE;
-DROP TABLE person CASCADE;
-DROP TABLE activity CASCADE;
-DROP TABLE career CASCADE;
-DROP TABLE rank CASCADE;
