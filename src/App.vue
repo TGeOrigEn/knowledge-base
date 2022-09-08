@@ -123,10 +123,10 @@ export default {
         .then(response => this.persons = response.data)
         .catch(error => console.log(error));
     },
-    
+
     async create() {
       axios.post("http://194.87.232.70:8085/api/person", {
-        family: "",
+        family: "123",
         salary: "",
         awards: "",
         property: "",
