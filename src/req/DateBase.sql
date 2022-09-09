@@ -72,7 +72,7 @@ create TABLE rank(
     --Дата окончания
     end_date VARCHAR(16),
     --Степень
-    degree VARCHAR(8),
+    degree VARCHAR(16),
     --Название
     name VARCHAR(255),
     FOREIGN KEY (person_id) REFERENCES person (id)
