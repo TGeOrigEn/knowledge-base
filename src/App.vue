@@ -1,7 +1,6 @@
 <template>
   <table>
     <button @click="refresh">Обновить</button>
-    <button @click="create">Создать</button>
     <thead>
       <tr>
         <th>ФИО, год рождения, происхождение, вероисповедание</th>
