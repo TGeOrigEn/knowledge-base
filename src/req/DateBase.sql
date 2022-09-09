@@ -1,7 +1,7 @@
 --Личность
 create TABLE Person(
     --Уникальный номер
-    ID SERIAL IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+    ID SERIAL NOT NULL PRIMARY KEY,
     --Фамилия
     Surname VARCHAR(32) NOT NULL,
     --Имя
@@ -34,7 +34,7 @@ create TABLE Person(
 --Деятельность
 create TABLE Activity(
     --Уникальный номер
-    ID SERIAL IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+    ID SERIAL NOT NULL PRIMARY KEY,
     --Уникальный номер Личности
     PersonID SERIAL NOT NULL,
     --Название деятельности
@@ -48,7 +48,7 @@ create TABLE Activity(
 --Карьера
 create TABLE Career(
     --Уникальный номер
-    ID SERIAL IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+    ID SERIAL NOT NULL PRIMARY KEY,
     --Уникальный номер Личности
     PersonID SERIAL NOT NULL,
     --Дата начала
@@ -64,7 +64,7 @@ create TABLE Career(
 --Чин
 create TABLE Rank(
     --Уникальный номер
-    ID SERIAL IDENTITY(1, 1) NOT NULL PRIMARY KEY,
+    ID SERIAL NOT NULL PRIMARY KEY,
     --Уникальный номер Личности
     PersonID SERIAL NOT NULL,
     --Дата начала
