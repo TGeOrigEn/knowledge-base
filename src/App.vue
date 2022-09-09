@@ -1,6 +1,5 @@
 <template>
   <table>
-
     <button @click="refresh">Обновить</button>
     <button @click="create">Создать</button>
     <thead>
@@ -18,11 +17,10 @@
     </thead>
     <tbody>
       <tr v-for="person in persons">
-        <!-- <td>
-          <FullNameCell :name="person.fullName.name" :surname="person.fullName.surname"
-            :patronymic="person.fullName.patronymic" :yearBirth="person.fullName.yearBirth"
-            :religion="person.fullName.religion" :origin="person.fullName.origin" />
-        </td> -->
+        <td>
+          <FullNameCell :surname="person.surname" :name="person.name" :patronymic="person.patronymic"
+            :yearBirth="person.datebirth" :religion="person.religion" :origin="person.origin" />
+        </td>
         <td>
           <SimapleCell :text="person.awards" />
         </td>
@@ -33,23 +31,24 @@
           <SimapleCell :text="person.property" />
         </td>
         <td>
-          <SimapleCell :text="person.family" />
-        </td>
-        <!-- <td>
-          <ActivityCell v-for="item in person.activity" :activity="item.activity" :description="item.description" />
+          <SimapleCell :text="person.maritalstatus" />
         </td>
         <td>
-          <EducationCell :level="person.education.level" :place="person.education.place"
-            :establishment="person.education.establishment" />
+          <ActivityCell v-for="item in activitys.filter(x => x.personid === person.id)" :activity="item.name"
+            :description="item.description" />
         </td>
         <td>
-          <CareerCell v-for="item in person.career" :startDate="item.startDate" :endDate="item.endDate"
-            :career="item.career" :place="item.place" />
+          <EducationCell :level="person.leveleducation" :place="person.locationeducationalinstitution"
+            :establishment="person.educationalinstitution" />
         </td>
         <td>
-          <RankCell v-for="item in person.rank" :startDate="item.startDate" :endDate="item.endDate"
-            :degree="item.degree" :rank="item.rank" />
-        </td> -->
+          <CareerCell v-for="item in careers.filter(x => x.personid === person.id)" :startDate="item.startdate" :endDate="item.enddate"
+            :career="item.post" :place="item.place" />
+        </td>
+        <td>
+          <RankCell v-for="item in ranks.filter(x => x.personid === person.id)" :startDate="item.startdate" :endDate="item.enddate"
+            :degree="item.degree" :rank="item.name" />
+        </td>
       </tr>
     </tbody>
   </table>
@@ -65,19 +64,8 @@ import SimapleCell from './components/SimpleCell.vue';
 import EducationCell from './components/EducationCell.vue';
 import ActivityCell from './components/ActivityCell.vue';
 
-import P from './entities/Person'
-
-// new P.Person(
-//         new P.FullName("1", "Гурьев", "Алексей", "Васильевич", "1842", "православное", "из духовного звания"),
-//         "Темно-бронзовая медаль в память войны 1853-1856 годов на ленте ордена Андрея Первозванного для ношения на груди",
-//         "Жалованье 450 рублей Столовых 200 рублей Итого 650 рублей",
-//         "Не имеет",
-//         "Женат на Марии Яковлевой, имеет дочерей: - Клавдия, 02.11.1893 - Серафима, 23.06.1858",
-//         [new P.Activity("Научная деятельность", "сформировал основы чего-то и оформил как научный труд", "МЕСТО")],
-//         new P.Education("Высшее", "Семинария", "Воронежская духовная"),
-//         [new P.Career("5.04.1849", "29.09.1850", "Регистратор", "Томская губерния")],
-//         [new P.Rank("5.04.1849", "29.09.1850", "VI", "Статский советник")],
-//       )]
+const SERVER_PORT = '5050';
+const SERVER_HOST = '194.87.232.70';
 
 export default {
   components: {
@@ -94,11 +82,23 @@ export default {
   },
   data() {
     return {
-      persons: []
+      persons: [],
+      activitys: [],
+      careers: [],
+      ranks: []
     }
   },
   methods: {
-
+    refresh() {
+      axios.get('http://' + SERVER_HOST + ':' + SERVER_PORT + '/api/person')
+        .then(response => this.persons = response.data);
+      axios.get('http://' + SERVER_HOST + ':' + SERVER_PORT + '/api/activity')
+        .then(response => this.activitys = response.data);
+      axios.get('http://' + SERVER_HOST + ':' + SERVER_PORT + '/api/career')
+        .then(response => this.careers = response.data);
+      axios.get('http://' + SERVER_HOST + ':' + SERVER_PORT + '/api/rank')
+        .then(response => this.ranks = response.data);
+    },
   }
 }
 </script>
