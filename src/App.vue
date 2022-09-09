@@ -18,7 +18,7 @@
       <tr v-for="person in persons">
         <td>
           <FullNameCell :surname="person.surname" :name="person.name" :patronymic="person.patronymic"
-            :yearBirth="person.datebirth" :religion="person.religion" :origin="person.origin" />
+            :yearBirth="person.date_birth" :religion="person.religion" :origin="person.origin" />
         </td>
         <td>
           <SimapleCell :text="person.awards" />
@@ -30,22 +30,22 @@
           <SimapleCell :text="person.property" />
         </td>
         <td>
-          <SimapleCell :text="person.maritalstatus" />
+          <SimapleCell :text="person.marital_status" />
         </td>
         <td>
-          <ActivityCell v-for="item in activitys.filter(x => x.personid === person.id)" :activity="item.name"
+          <ActivityCell v-for="item in activitys.filter(x => x.person_id === person.id)" :activity="item.name"
             :description="item.description" />
         </td>
         <td>
-          <EducationCell :level="person.leveleducation" :place="person.locationeducationalinstitution"
-            :establishment="person.educationalinstitution" />
+          <EducationCell :level="person.level_education" :place="person.location_educational_institution"
+            :establishment="person.educational_institution" />
         </td>
         <td>
-          <CareerCell v-for="item in careers.filter(x => x.personid === person.id)" :startDate="item.startdate" :endDate="item.enddate"
+          <CareerCell v-for="item in careers.filter(x => x.person_id === person.id)" :startDate="item.start_date" :endDate="item.end_date"
             :career="item.post" :place="item.place" />
         </td>
         <td>
-          <RankCell v-for="item in ranks.filter(x => x.personid === person.id)" :startDate="item.startdate" :endDate="item.enddate"
+          <RankCell v-for="item in ranks.filter(x => x.person_id === person.id)" :startDate="item.start_date" :endDate="item.end_date"
             :degree="item.degree" :rank="item.name" />
         </td>
       </tr>
