@@ -1,7 +1,7 @@
 <template>
     <div>
         <span>{{ activity }}:&nbsp</span>
-        <span>{{ description }}.</span>
+        <span>{{ description }};</span>
     </div>
 </template>
   

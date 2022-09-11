@@ -1,30 +1,44 @@
 <template>
     <div>
-        <label>{{ label }}</label>
-        <textarea v-model="text" @placeholder="placeholder" />
+        <label>{{ label }}
+            <textarea :disabled="disabled" :placeholder="placeholder" type="text" :value="modelValue"
+                @input="updateValue" />
+        </label>
     </div>
 </template>
-  
+
 <script>
 export default {
-    data() {
-        return {
-            text: ""
-        };
-    },
     props: {
+        modelValue: {
+            type: String,
+            required: false,
+        },
+        disabled: {
+            type: Boolean,
+            required: false,
+            default: false
+        },
         label: {
             type: String,
-            required: true
+            required: true,
         },
         placeholder: {
             type: String,
-            required: true
+            required: true,
+        }
+    },
+    methods: {
+        updateValue(event) {
+            this.$emit('update:modelValue', event.target.value);
         }
     }
 }
 </script>
-  
-<style>
+
+<style scoped>
+textarea:disabled {
+    background-color: white;
+    color: black;
+}
 </style>
-  

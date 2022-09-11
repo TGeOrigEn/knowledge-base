@@ -1,37 +1,44 @@
 <template>
     <div>
         <label>{{ label }}</label>
-        <select>
-            <option @click="" v-for="option in options">{{ option }}</option>
+        <select :disabled="disabled" :value="modelValue" @input="updateValue">
+            <option :value="option" v-for="option in options">{{ option }}</option>
         </select>
     </div>
 </template>
   
 <script>
 export default {
-    data() {
-        return {
-            selected: ''
-        };
-    },
-    methods: {
-        setSelected(event) {
-            selected = event.target.textContent;
-        }
-    },
     props: {
+        modelValue: {
+            type: String,
+            required: false,
+        },
         options: {
             type: Array,
-            required: true
+            required: true,
+        },
+        disabled: {
+            type: Boolean,
+            required: false,
+            default: false
         },
         label: {
             type: String,
-            required: true
-        },
+            required: true,
+        }
+    },
+    methods: {
+        updateValue(event) {
+            this.$emit('update:modelValue', event.target.value);
+        }
     }
 }
 </script>
-  
-<style>
+
+<style scoped>
+select:disabled {
+    background-color: white;
+    color: black;
+}
 </style>
-  
