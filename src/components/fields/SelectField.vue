@@ -1,7 +1,7 @@
 <template>
     <div>
         <label>{{ label }}</label>
-        <select :disabled="disabled" :value="modelValue" @input="updateValue">
+        <select :maxlength="length" :disabled="disabled" :value="modelValue" @input="updateValue">
             <option :value="option" v-for="option in options">{{ option }}</option>
         </select>
     </div>
@@ -13,6 +13,10 @@ export default {
         modelValue: {
             type: String,
             required: false,
+        },
+        length: {
+            type: Number,
+            require: true
         },
         options: {
             type: Array,

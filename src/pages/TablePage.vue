@@ -1,10 +1,12 @@
 <template>
     <div>
+        <button @click="refresh">Обновить</button>
+        <button @click="create">Создать</button>
         <table>
-            <button @click="refresh">Обновить</button>
-            <button @click="create">Создать</button>
+
             <thead>
                 <tr>
+                    <th>№</th>
                     <th>ФИО, год рождения, происхождение, вероисповедание</th>
                     <th>Награды</th>
                     <th>Жалование</th>
@@ -17,7 +19,10 @@
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="person in persons" @dblclick="click(person)">
+                <tr v-for="(person, index) in persons" :key="index" @dblclick="click({...person})">
+                    <td>
+                        {{index + 1}}
+                    </td>
                     <td>
                         <FullNameCell :surname="person.surname" :name="person.name" :patronymic="person.patronymic"
                             :yearBirth="person.date_birth" :religion="person.religion" :origin="person.origin" />
@@ -54,7 +59,7 @@
                     </td>
                 </tr>
             </tbody>
-            <Card v-if="show" :onClose="close" :person="person"></Card>
+            <Card :readonly="false" v-if="show" :onClose="close" :person="person"></Card>
         </table>
     </div>
 </template>

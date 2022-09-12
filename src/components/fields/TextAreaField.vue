@@ -1,7 +1,7 @@
 <template>
     <div>
         <label>{{ label }}
-            <textarea :disabled="disabled" :placeholder="placeholder" type="text" :value="modelValue"
+            <textarea :maxlength="length" :disabled="disabled" :placeholder="placeholder" type="text" :value="modelValue"
                 @input="updateValue" />
         </label>
     </div>
@@ -18,6 +18,10 @@ export default {
             type: Boolean,
             required: false,
             default: false
+        },
+        length: {
+            type: Number,
+            require: true
         },
         label: {
             type: String,

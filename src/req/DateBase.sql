@@ -11,15 +11,15 @@ create TABLE person(
     --Дата рождения
     date_birth VARCHAR(16) NOT NULL,
     --Вероисповедание
-    religion VARCHAR(64) NOT NULL,
+    religion VARCHAR(16) NOT NULL,
     --Происхождение
-    origin VARCHAR(64) NOT NULL,
+    origin VARCHAR(16) NOT NULL,
     --Уровень образования
-    level_education VARCHAR(64) NOT NULL,
+    level_education VARCHAR(16) NOT NULL,
     --Учебное учреждение
     educational_institution VARCHAR(64) NOT NULL,
     --Расположение учебного учреждения
-    location_educational_institution VARCHAR(64) NOT NULL,
+    location_educational_institution VARCHAR(16) NOT NULL,
     --Имущество
     property TEXT NOT NULL,
     --Награды

@@ -1,7 +1,8 @@
 <template>
     <div>
         <label>{{ label }}</label>
-        <input :disabled="disabled" :placeholder="placeholder" type="text" :value="modelValue" @input="updateValue" />
+        <input :maxlength="length" :disabled="disabled" :placeholder="placeholder" type="text" :value="modelValue"
+            @input="updateValue" />
     </div>
 </template>
 
@@ -21,6 +22,10 @@ export default {
             type: String,
             required: true,
         },
+        length: {
+            type: Number,
+            require: true
+        },
         placeholder: {
             type: String,
             required: true,
@@ -36,7 +41,6 @@ export default {
 
 <style scoped>
 input:disabled {
-    border: 0;
     background-color: white;
     color: black;
 }
