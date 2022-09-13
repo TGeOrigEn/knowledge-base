@@ -2,24 +2,87 @@
     <div>
         <button @click="refresh">Обновить</button>
         <button @click="create">Создать</button>
-        <table>
-            <thead>
-                <tr>
-                    <th>№</th>
-                    <th>ФИО, год рождения, происхождение, вероисповедание</th>
-                    <th>Награды</th>
-                    <th>Жалование</th>
-                    <th>Имущество</th>
-                    <th>Семейное положение</th>
-                    <th>Научная, культурно-просветительская, благотворительная деятельность</th>
-                    <th>Образование</th>
-                    <th>Карьера</th>
-                    <th>Чин</th>
-                </tr>
-            </thead>
-        </table>
-        <div :class="'tableFixHead'">
+        <div>
             <table>
+                <thead>
+                    <tr>
+                        <th :class="'table-header'">
+                            <div :class="'targer-for-handler'"></div>
+                            <div :class="'table-header-buttons-group'">
+                                <button :class="'table-header-button dropdown-toggle dropdown-margin'">#</button>
+                                <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
+                            </div>
+                        </th>
+                        <th :class="'table-header'">
+                            <div :class="'targer-for-handler'"></div>
+                            <div :class="'table-header-buttons-group'">
+                                <button :class="'table-header-button dropdown-toggle dropdown-margin'">БИО</button>
+                                <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
+                            </div>
+                        </th>
+                        <th :class="'table-header'">
+                            <div :class="'targer-for-handler'"></div>
+                            <div :class="'table-header-buttons-group'">
+                                <button :class="'table-header-button dropdown-toggle dropdown-margin'">Награды</button>
+                                <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
+                            </div>
+                        </th>
+                        <th :class="'table-header'">
+                            <div :class="'targer-for-handler'"></div>
+                            <div :class="'table-header-buttons-group'">
+                                <button
+                                    :class="'table-header-button dropdown-toggle dropdown-margin'">Жалование</button>
+                                <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
+                            </div>
+                        </th>
+                        <th :class="'table-header'">
+                            <div :class="'targer-for-handler'"></div>
+                            <div :class="'table-header-buttons-group'">
+                                <button
+                                    :class="'table-header-button dropdown-toggle dropdown-margin'">Имущетсво</button>
+                                <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
+                            </div>
+                        </th>
+                        <th :class="'table-header'">
+                            <div :class="'targer-for-handler'"></div>
+                            <div :class="'table-header-buttons-group'">
+                                <button :class="'table-header-button dropdown-toggle dropdown-margin'">Семейное
+                                    положение</button>
+                                <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
+                            </div>
+                        </th>
+                        <th :class="'table-header'">
+                            <div :class="'targer-for-handler'"></div>
+                            <div :class="'table-header-buttons-group'">
+                                <button
+                                    :class="'table-header-button dropdown-toggle dropdown-margin'">Деятельность</button>
+                                <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
+                            </div>
+                        </th>
+                        <th :class="'table-header'">
+                            <div :class="'targer-for-handler'"></div>
+                            <div :class="'table-header-buttons-group'">
+                                <button
+                                    :class="'table-header-button dropdown-toggle dropdown-margin'">Образование</button>
+                                <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
+                            </div>
+                        </th>
+                        <th :class="'table-header'">
+                            <div :class="'targer-for-handler'"></div>
+                            <div :class="'table-header-buttons-group'">
+                                <button :class="'table-header-button dropdown-toggle dropdown-margin'">Карьера</button>
+                                <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
+                            </div>
+                        </th>
+                        <th :class="'table-header'">
+                            <div :class="'targer-for-handler'"></div>
+                            <div :class="'table-header-buttons-group'">
+                                <button :class="'table-header-button dropdown-toggle dropdown-margin'">Чин</button>
+                                <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
+                            </div>
+                        </th>
+                    </tr>
+                </thead>
                 <tbody>
                     <tr v-for="(person, index) in persons" :key="index" @dblclick="click({...person})">
                         <td>
@@ -152,6 +215,45 @@ export default {
 </script>
   
 <style>
+.table-header {
+    min-width: max-content;
+}
+
+.targer-for-handler {
+    position: relative;
+    min-width: min-content;
+    user-select: none;
+    right: 0;
+    top: 0;
+}
+
+.table-header-button {
+    border-radius: 0;
+    min-width: fit-content;
+    height: 100%;
+    width: 100%;
+}
+
+.table-header-buttons-group {
+    display: flex;
+    height: 100%;
+    width: 100%;
+}
+
+.dropdown-margin::after {
+    margin-left: .255em;
+}
+
+.dropdown-toggle::after {
+    display: inline-block;
+    vertical-align: .255em;
+    content: "";
+    border-top: .3em solid;
+    border-right: .3em solid transparent;
+    border-bottom: 0;
+    border-left: .3em solid transparent;
+}
+
 /* .resize-handler {
     position: absolute;
     cursor: col-resize;
@@ -164,40 +266,36 @@ export default {
 
 .tableFixHead {
     overflow: auto;
-    height: 500px;
 }
 
-thead th {
+th {
     position: relative;
     top: 0;
-    z-index: 1;
-}
+    padding: 0;
 
-.tableFixHead thead th {
-    position: sticky;
-    top: 0;
-    z-index: 1;
 }
 
 /* Just common table stuff. Really. */
 table {
-    border-collapse: collapse;
+    border-collapse: separate;
+    border-spacing: 0;
     width: 100%;
 }
 
 th,
 td {
     text-align: center;
-    padding: 8px 16px;
+    /* padding: 8px 16px; */
 }
 
-th {
-    /* background: #eee; */
+tr {
+    height: 100%;
 }
 
 table,
 th,
 td {
+    height: 100%;
     text-align: center;
     border: 1px solid black;
 }

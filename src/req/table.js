@@ -3,15 +3,16 @@ const a = (table) => {
     resizableGrid();
 
     function resizableGrid() {
-        const row = table.getElementsByTagName('tr')[0],
-            cols = row ? row.children : undefined;
+        const row = table.getElementsByTagName('tr')[0];
+        // var cols = row ? row.getElementsByClassName('targer-for-handler') : undefined;
+        var cols = row ? row.children : undefined;
         if (!cols) return;
 
-        for (var i = 0; i < cols.length; i++) {
+        for (var i = 1; i < cols.length - 1; i++) {
             const handler = createHandler();
             cols[i].appendChild(handler);
             setListeners(handler);
-         
+            setInterval(() => handler.style.height = `${table.offsetHeight}px`, 50);
         }
 
         function setListeners(handlerElement) {
@@ -33,7 +34,6 @@ const a = (table) => {
             };
 
             function handlerUp(event) {
-                event.target.style.borderRight = '';
                 handler.currentColumnWidth = undefined;
                 handler.nextColumnWidth = undefined;
                 handler.currentColumn = undefined;
@@ -45,8 +45,6 @@ const a = (table) => {
                 handler.pageX = event.pageX;
                 handler.currentColumn = event.target.parentElement;
                 handler.nextColumn = handler.currentColumn.nextElementSibling;
-
-                event.target.style.borderRight = '2px solid #0000ff'
 
                 const paddingDifference = getPaddingDifference(handler.currentColumn);
 
@@ -60,9 +58,9 @@ const a = (table) => {
             handler.style.position = 'absolute';
             handler.style.cursor = 'col-resize';
             handler.style.userSelect = 'none';
-            handler.style.height = '100%'
-            handler.style.width = '5px';
-            handler.style.right = 0;
+            handler.style.height = '100px'
+            handler.style.width = '4px';
+            handler.style.right = '-3px';
             handler.style.top = 0;
             document.addEventListener('mouseup', () => handler.style.borderRight = '');
             return handler;
