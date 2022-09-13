@@ -15,6 +15,9 @@ export default {
 }
 </script>
   
-<style>
+<style scoped >
+pre::selection {
+    background: none;
+}
 </style>
   

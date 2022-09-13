@@ -2,25 +2,24 @@
     <div>
         <button @click="refresh">Обновить</button>
         <button @click="create">Создать</button>
+        <table>
+            <thead>
+                <tr>
+                    <th>№</th>
+                    <th>ФИО, год рождения, происхождение, вероисповедание</th>
+                    <th>Награды</th>
+                    <th>Жалование</th>
+                    <th>Имущество</th>
+                    <th>Семейное положение</th>
+                    <th>Научная, культурно-просветительская, благотворительная деятельность</th>
+                    <th>Образование</th>
+                    <th>Карьера</th>
+                    <th>Чин</th>
+                </tr>
+            </thead>
+        </table>
         <div :class="'tableFixHead'">
             <table>
-                <thead>
-                    <tr>
-                        <th>№
-                            <!-- <div @mousedown="handlerDown" @mousemove="handlerMove" @mouseup="handlerUp"
-                                :class="'resize-handler'"></div> -->
-                        </th>
-                        <th>ФИО, год рождения, происхождение, вероисповедание</th>
-                        <th>Награды</th>
-                        <th>Жалование</th>
-                        <th>Имущество</th>
-                        <th>Семейное положение</th>
-                        <th>Научная, культурно-просветительская, благотворительная деятельность</th>
-                        <th>Образование</th>
-                        <th>Карьера</th>
-                        <th>Чин</th>
-                    </tr>
-                </thead>
                 <tbody>
                     <tr v-for="(person, index) in persons" :key="index" @dblclick="click({...person})">
                         <td>
@@ -97,37 +96,13 @@ export default {
         Card
     },
     mounted() {
-        //createTable();
-        const handler = this.createHandler();
-        const table = document.getElementsByTagName('table')[0];
-        const theader = table.getElementsByTagName('thead')[0]
-        const headers = theader.children;
-        headers.appendChild(handler);
-        handler.addEventListener('mousedown', this.handlerDown);
-        handler.addEventListener('mouseup', this.handlerUp);
-        handler.addEventListener('mousemove', this.handlerMove);
-    },
-    beforeUpdate() {
-
-        const resizeHandlers = document.getElementsByClassName('resize-handler');
-        console.log(resizeHandlers[0]);
-        const table = document.getElementsByTagName('table');
-        console.log(resizeHandlers[0].style.height);
-        console.log(table[0].offsetHeight);
-        resizeHandlers[0].style.height = `${table[0].offsetHeight}px`;
+        createTable(document.getElementsByTagName('table')[0]);
     },
     created() {
         this.refresh();
     },
     data() {
         return {
-            handler: {
-                currentColumnWidth: undefined,
-                nextColumnWidth: undefined,
-                currentColumn: undefined,
-                nextColumn: undefined,
-                pageX: undefined,
-            },
             show: false,
             persons: [],
             activitys: [],
@@ -137,61 +112,6 @@ export default {
         }
     },
     methods: {
-        createHandler() {
-            const handler = document.createElement('div');
-            handler.className = 'resize-handler';
-            return handler;
-        },
-
-        handlerDown(event) {
-            console.log("down");
-            const handler = this.handler;
-
-            handler.currentColumn = event.target.parentElement;
-            handler.nextColumn = handler.currentColumn.nextElementSibling;
-            handler.pageX = event.pageX;
-
-            const paddingDifference = this.getPaddingDifference(handler.currentColumn);
-
-
-            console.log
-            handler.currentColumnWidth = handler.offsetWidth - paddingDifference;
-
-            if (handler.nextColumn)
-                handler.nextColumnWidth = handler.offsetWidth - paddingDifference;
-        },
-
-        handlerUp() {
-            console.log("up");
-            this.handler.currentColumn = undefined;
-            this.handler.nextColumn = undefined;
-            this.handler.pageX = undefined;
-        },
-
-        handlerMove(event) {
-            console.log("move");
-            const handler = this.handler;
-
-            if (!handler.currentColumn) return;
-            const differencePageX = event.pageX - handler.pageX;
-            console.log(`differencePageX: ${differencePageX}`);
-
-            if (handler.nextColumn)
-                handler.nextColumn.style.width = `${(handler.nextColumnWidth - differencePageX)}px`;
-            handler.currentColumn.style.width = `${handler.currentColumnWidth + differencePageX}px`;
-        },
-
-        getPaddingDifference(column) {
-            if (this.getAttributeValue(column, 'box-sizing') == 'border-box') return 0;
-            const paddingRight = this.getAttributeValue(column, 'padding-right');
-            const paddingLeft = this.getAttributeValue(column, 'padding-left');
-            return parseInt(paddingLeft) + parseInt(paddingRight);
-        },
-
-        getAttributeValue(element, attributeName) {
-            return window.getComputedStyle(element, null).getPropertyValue(attributeName);
-        },
-
         refresh() {
             axios.get('http://' + SERVER_HOST + ':' + SERVER_PORT + '/api/person/all')
                 .then(response => this.persons = response.data);
@@ -232,7 +152,7 @@ export default {
 </script>
   
 <style>
-.resize-handler {
+/* .resize-handler {
     position: absolute;
     cursor: col-resize;
     user-select: none;
@@ -240,11 +160,17 @@ export default {
     width: 5px;
     right: 0;
     top: 0;
-}
+} */
 
 .tableFixHead {
     overflow: auto;
     height: 500px;
+}
+
+thead th {
+    position: relative;
+    top: 0;
+    z-index: 1;
 }
 
 .tableFixHead thead th {
@@ -266,10 +192,10 @@ td {
 }
 
 th {
-    background: #eee;
+    /* background: #eee; */
 }
 
-*/ table,
+table,
 th,
 td {
     text-align: center;

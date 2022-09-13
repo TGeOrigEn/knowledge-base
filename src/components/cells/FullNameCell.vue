@@ -44,5 +44,8 @@ export default {
 }
 </script>
 
-<style>
+<style scoped >
+span::selection {
+  background: none;
+}
 </style>
