@@ -102,6 +102,10 @@ export default {
 </script>
   
 <style>
+input {
+    width: 400px;
+}
+
 .modal {
     width: 70vw;
     overflow: auto;
