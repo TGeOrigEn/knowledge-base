@@ -3,7 +3,9 @@
         <div>
             <DateField :label="'Дата начала:'" v-model="startDate"></DateField>
             <DateField :label="'Дата Окончания:'" v-model="endDate"></DateField>
-            <SelectField :label="'Класс:'" :options="['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV']" v-model="degree"></SelectField>
+            <SelectField :label="'Класс:'"
+                :options="['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV']"
+                v-model="degree"></SelectField>
             <TextAreaField :length="4096" v-model="name" :label="'Название:'" :placeholder="'Введите Название...'" />
             <button @click="create">Добавить 'Чин'</button>
             <div :class="'list'">
@@ -51,14 +53,25 @@ export default {
         person: undefined
     },
     methods: {
+        padTo2Digits(num) {
+            return num.toString().padStart(2, '0');
+        },
+
+        formatDate(date) {
+            return [
+                this.padTo2Digits(date.getDate()),
+                this.padTo2Digits(date.getMonth() + 1),
+                date.getFullYear(),
+            ].join('.');
+        },
         get() {
             setTimeout(() => axios.get(`http://${SERVER_HOST}:${SERVER_PORT}/api/rank`, { params: { person_id: this.$props.person.id } }).then((response) => { this.value = response.data; console.log('get'); }), 500);
         },
         async create() {
             axios.post(`http://${SERVER_HOST}:${SERVER_PORT}/api/rank`, {
                 "person_id": this.$props.person.id,
-                "start_date": this.startDate,
-                "end_date": this.endDate,
+                "start_date": this.formatDate(new Date(this.startDate)),
+                "end_date": this.formatDate(new Date(this.endDate)),
                 "degree": this.degree,
                 "name": this.name
             }).then(this.get);
