@@ -12,9 +12,9 @@
             <SelectField :length="16" :disabled="readonly"
                 :options="['Православное', 'Римско-католическое', 'Евангельско-лютеранское', 'Иное']"
                 v-model="value.religion" :label="'Вероисповедение:'" />
-            <TextField :length="16" :disabled="readonly" v-model="value.origin"
+            <TextField :length="256" :disabled="readonly" v-model="value.origin"
                 :placeholder="'Введите происхождение...'" :label="'Происхождение:'" />
-            <SelectField :length="256" :disabled="readonly"
+            <SelectField :length="16" :disabled="readonly"
                 :options="['Нет образования', 'Начальное образование', 'Домашнее образование', 'Среднее образование', 'Среднее военное образование', 'Высшее образование', 'Высшее военное образование']"
                 v-model="value.level_education" :label="'Уровень образования:'" />
             <TextField :length="64" :disabled="readonly" v-model="value.educational_institution"
