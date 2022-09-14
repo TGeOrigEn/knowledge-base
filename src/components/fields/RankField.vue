@@ -3,7 +3,7 @@
         <div>
             <DateField :label="'Дата начала:'" v-model="startDate"></DateField>
             <DateField :label="'Дата Окончания:'" v-model="endDate"></DateField>
-            <SelectField :label="'Класс:'" :options="['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XII', 'XIV', 'XV', 'XVI', 'XVII']" v-model="degree"></SelectField>
+            <SelectField :label="'Класс:'" :options="['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X', 'XI', 'XII', 'XIII', 'XIV']" v-model="degree"></SelectField>
             <TextAreaField :length="4096" v-model="name" :label="'Название:'" :placeholder="'Введите Название...'" />
             <button @click="create">Добавить 'Чин'</button>
             <div :class="'list'">
