@@ -25,5 +25,9 @@ export default {
 span::selection {
     background: none;
 }
+
+span {
+    cursor: pointer;
+}
 </style>
   

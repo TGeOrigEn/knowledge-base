@@ -9,75 +9,71 @@
                         <th :class="'table-header'">
                             <div :class="'targer-for-handler'"></div>
                             <div :class="'table-header-buttons-group'">
-                                <button :class="'table-header-button dropdown-toggle dropdown-margin'">#</button>
+                                <button :class="'table-header-button dropdown-toggle dropdown-margin'">№</button>
+                            </div>
+                        </th>
+                        <th :class="'table-header'">
+                            <div :class="'targer-for-handler'"></div>
+                            <div :class="'table-header-buttons-group'">
+                                <button :class="'table-header-button'">БИО</button>
                                 <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
                             </div>
                         </th>
                         <th :class="'table-header'">
                             <div :class="'targer-for-handler'"></div>
                             <div :class="'table-header-buttons-group'">
-                                <button :class="'table-header-button dropdown-toggle dropdown-margin'">БИО</button>
+                                <button :class="'table-header-button'">Образование</button>
                                 <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
                             </div>
                         </th>
                         <th :class="'table-header'">
                             <div :class="'targer-for-handler'"></div>
                             <div :class="'table-header-buttons-group'">
-                                <button :class="'table-header-button dropdown-toggle dropdown-margin'">Награды</button>
+                                <button :class="'table-header-button'">Награды</button>
                                 <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
                             </div>
                         </th>
                         <th :class="'table-header'">
                             <div :class="'targer-for-handler'"></div>
                             <div :class="'table-header-buttons-group'">
-                                <button
-                                    :class="'table-header-button dropdown-toggle dropdown-margin'">Жалование</button>
+                                <button :class="'table-header-button'">Жалование</button>
                                 <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
                             </div>
                         </th>
                         <th :class="'table-header'">
                             <div :class="'targer-for-handler'"></div>
                             <div :class="'table-header-buttons-group'">
-                                <button
-                                    :class="'table-header-button dropdown-toggle dropdown-margin'">Имущетсво</button>
+                                <button :class="'table-header-button'">Имущетсво</button>
                                 <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
                             </div>
                         </th>
                         <th :class="'table-header'">
                             <div :class="'targer-for-handler'"></div>
                             <div :class="'table-header-buttons-group'">
-                                <button :class="'table-header-button dropdown-toggle dropdown-margin'">Семейное
+                                <button :class="'table-header-button'">Семейное
                                     положение</button>
                                 <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
                             </div>
                         </th>
+
                         <th :class="'table-header'">
                             <div :class="'targer-for-handler'"></div>
                             <div :class="'table-header-buttons-group'">
-                                <button
-                                    :class="'table-header-button dropdown-toggle dropdown-margin'">Деятельность</button>
+                                <button :class="'table-header-button'">Деятельность</button>
                                 <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
                             </div>
                         </th>
                         <th :class="'table-header'">
                             <div :class="'targer-for-handler'"></div>
                             <div :class="'table-header-buttons-group'">
-                                <button
-                                    :class="'table-header-button dropdown-toggle dropdown-margin'">Образование</button>
+                                <button :class="'table-header-button'">Карьера</button>
                                 <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
                             </div>
                         </th>
                         <th :class="'table-header'">
                             <div :class="'targer-for-handler'"></div>
                             <div :class="'table-header-buttons-group'">
-                                <button :class="'table-header-button dropdown-toggle dropdown-margin'">Карьера</button>
-                                <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
-                            </div>
-                        </th>
-                        <th :class="'table-header'">
-                            <div :class="'targer-for-handler'"></div>
-                            <div :class="'table-header-buttons-group'">
-                                <button :class="'table-header-button dropdown-toggle dropdown-margin'">Чин</button>
+                                <button :class="'table-header-button'">Чин</button>
                                 <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
                             </div>
                         </th>
@@ -93,6 +89,11 @@
                                 :yearBirth="person.date_birth" :religion="person.religion" :origin="person.origin" />
                         </td>
                         <td>
+                            <EducationCell :level="person.level_education"
+                                :place="person.location_educational_institution"
+                                :establishment="person.educational_institution" />
+                        </td>
+                        <td>
                             <SimapleCell :text="person.awards" />
                         </td>
                         <td>
@@ -104,14 +105,10 @@
                         <td>
                             <SimapleCell :text="person.marital_status" />
                         </td>
+
                         <td>
                             <ActivityCell v-for="item in activitys.filter(x => x.person_id === person.id)"
                                 :activity="item.name" :description="item.description" />
-                        </td>
-                        <td>
-                            <EducationCell :level="person.level_education"
-                                :place="person.location_educational_institution"
-                                :establishment="person.educational_institution" />
                         </td>
                         <td>
                             <CareerCell v-for="item in careers.filter(x => x.person_id === person.id)"
@@ -143,6 +140,7 @@ import EducationCell from '../components/cells/EducationCell.vue';
 import ActivityCell from '../components/cells/ActivityCell.vue';
 import createTable from '../req/table'
 import Card from '@/components/Card.vue';
+import ActivityFilter from '@/components/filters/ActivityFilter.vue';
 
 const SERVER_PORT = '5050';
 const SERVER_HOST = '194.87.232.70';
@@ -156,6 +154,8 @@ export default {
         SimapleCell,
         CareerCell,
         RankCell,
+
+        ActivityFilter,
         Card
     },
     mounted() {
@@ -252,6 +252,10 @@ export default {
     border-right: .3em solid transparent;
     border-bottom: 0;
     border-left: .3em solid transparent;
+}
+
+td::selection {
+    background: none;
 }
 
 /* .resize-handler {

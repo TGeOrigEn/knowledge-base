@@ -1,9 +1,9 @@
 <template>
-    <div>
-        <label>{{ label }}
-            <textarea :maxlength="length" :disabled="disabled" :placeholder="placeholder" type="text" :value="modelValue"
-                @input="updateValue" />
-        </label>
+    <div :class="'field'">
+        <label>{{ label }} </label>
+        <br />
+        <textarea :maxlength="length" :disabled="disabled" :placeholder="placeholder" type="text" :value="modelValue"
+            @input="updateValue" />
     </div>
 </template>
 

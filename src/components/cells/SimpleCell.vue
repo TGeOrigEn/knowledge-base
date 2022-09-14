@@ -19,5 +19,9 @@ export default {
 p::selection {
     background: none;
 }
+
+p {
+    cursor: pointer;
+}
 </style>
   

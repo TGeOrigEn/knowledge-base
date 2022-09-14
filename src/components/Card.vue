@@ -12,8 +12,8 @@
             <SelectField :length="16" :disabled="readonly"
                 :options="['Православное', 'Римско-католическое', 'Евангельско-лютеранское', 'Иное']"
                 v-model="value.religion" :label="'Вероисповедение:'" />
-            <SelectField :length="16" :disabled="readonly" :options="['1', '2', '3', 'Иное']" v-model="value.origin"
-                :label="'Происхождение:'" />
+            <TextField :length="16" :disabled="readonly" v-model="value.origin"
+                :placeholder="'Введите происхождение...'" :label="'Происхождение:'" />
             <SelectField :length="16" :disabled="readonly"
                 :options="['Нет образования', 'Начальное образование', 'Домашнее образование', 'Среднее образование', 'Среднее военное образование', 'Высшее образование', 'Высшее военное образование']"
                 v-model="value.level_education" :label="'Уровень образования:'" />
@@ -31,6 +31,9 @@
                 :label="'Семейное положение:'" :placeholder="'Введите семейное положение...'" />
             <TextAreaField :length="4096" :disabled="readonly" v-model="value.other"
                 :label="'Отпуска, отставки, штрафы, суды, военные походы:'" :placeholder="'Введите описание...'" />
+            <ActivityField :person="this.$props.person"></ActivityField>
+            <RankField :person="this.$props.person"></RankField>
+            <CareerField :person="this.$props.person"></CareerField>
             <button @click="save">Сохранить</button>
             <button @click="remove(), onClose()">Удалить</button>
             <button @click="onClose">Закрыть</button>
@@ -44,6 +47,9 @@ import TextAreaField from './fields/TextAreaField.vue';
 import SelectField from './fields/SelectField.vue';
 import TextField from './fields/TextField.vue';
 import DateField from './fields/DateField.vue';
+import ActivityField from './fields/ActivityField.vue';
+import RankField from './fields/RankField.vue';
+import CareerField from './fields/CareerField.vue';
 
 const SERVER_PORT = '5050';
 const SERVER_HOST = '194.87.232.70';
@@ -53,11 +59,14 @@ export default {
         this.get();
     },
     components: {
+        ActivityField,
         TextAreaField,
         SelectField,
         TextField,
         DateField,
-        TextAreaField
+        TextAreaField,
+        RankField,
+        CareerField
     },
     data() {
         return {
@@ -94,6 +103,9 @@ export default {
   
 <style>
 .modal {
+    width: 70vw;
+    overflow: auto;
+    max-height: 90vh;
     background: rgb(255, 255, 255);
     position: absolute;
     float: left;

@@ -19,5 +19,9 @@ export default {
 pre::selection {
     background: none;
 }
+
+pre {
+    cursor: pointer;
+}
 </style>
   

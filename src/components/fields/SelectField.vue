@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :class="'field'">
         <label>{{ label }}</label>
         <select :maxlength="length" :disabled="disabled" :value="modelValue" @input="updateValue">
             <option :value="option" v-for="option in options">{{ option }}</option>

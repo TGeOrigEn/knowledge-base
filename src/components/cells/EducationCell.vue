@@ -1,10 +1,10 @@
 <template>
     <div>
-        <span>{{ level }};</span>
+        <span>Уровень образования: {{ level }};</span>
         <br />
-        <span>{{ place }};</span>
+        <span>Место учёбы: {{ place }};</span>
         <br />
-        <span>{{ establishment }}.</span>
+        <span>Учебное учреждение: {{ establishment }}.</span>
     </div>
 </template>
   
@@ -32,8 +32,12 @@ export default {
 </script>
   
 <style scoped >
-    span::selection {
-      background: none;
-    }
-    </style>
+span::selection {
+    background: none;
+}
+
+span {
+    cursor: pointer;
+}
+</style>
   

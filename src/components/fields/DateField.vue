@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :class="'field'">
         <label>{{ label }}</label>
         <input :maxlength="length" :disabled="disabled" type="date" :value="modelValue" @input="updateValue" required />
     </div>
@@ -14,12 +14,12 @@ export default {
         },
         length: {
             type: Number,
-            require: true
+            require: true,
         },
         disabled: {
             type: Boolean,
             required: false,
-            default: false
+            default: false,
         },
         label: {
             type: String,

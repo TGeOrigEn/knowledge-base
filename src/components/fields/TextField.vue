@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div :class="'field'">
         <label>{{ label }}</label>
         <input :maxlength="length" :disabled="disabled" :placeholder="placeholder" type="text" :value="modelValue"
             @input="updateValue" />

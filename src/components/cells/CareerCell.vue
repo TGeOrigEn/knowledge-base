@@ -29,8 +29,12 @@ export default {
 </script>
   
 <style scoped >
-    span::selection {
-      background: none;
-    }
-    </style>
+span::selection {
+    background: none;
+}
+
+span {
+    cursor: pointer;
+}
+</style>
   
