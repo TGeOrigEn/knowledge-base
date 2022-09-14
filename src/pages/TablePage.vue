@@ -56,13 +56,7 @@
                             </div>
                         </th>
 
-                        <th :class="'table-header'">
-                            <div :class="'targer-for-handler'"></div>
-                            <div :class="'table-header-buttons-group'">
-                                <button :class="'table-header-button'">Деятельность</button>
-                                <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
-                            </div>
-                        </th>
+
                         <th :class="'table-header'">
                             <div :class="'targer-for-handler'"></div>
                             <div :class="'table-header-buttons-group'">
@@ -74,6 +68,13 @@
                             <div :class="'targer-for-handler'"></div>
                             <div :class="'table-header-buttons-group'">
                                 <button :class="'table-header-button'">Чин</button>
+                                <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
+                            </div>
+                        </th>
+                        <th :class="'table-header'">
+                            <div :class="'targer-for-handler'"></div>
+                            <div :class="'table-header-buttons-group'">
+                                <button :class="'table-header-button'">Деятельность</button>
                                 <button :style="{flex: '1'}" :class="'table-header-button dropdown-toggle'"></button>
                             </div>
                         </th>
@@ -106,10 +107,7 @@
                             <SimapleCell :text="person.marital_status" />
                         </td>
 
-                        <td>
-                            <ActivityCell v-for="item in activitys.filter(x => x.person_id === person.id)"
-                                :activity="item.name" :description="item.description" />
-                        </td>
+
                         <td>
                             <CareerCell v-for="item in careers.filter(x => x.person_id === person.id)"
                                 :startDate="item.start_date" :endDate="item.end_date" :career="item.post"
@@ -119,6 +117,10 @@
                             <RankCell v-for="item in ranks.filter(x => x.person_id === person.id)"
                                 :startDate="item.start_date" :endDate="item.end_date" :degree="item.degree"
                                 :rank="item.name" />
+                        </td>
+                        <td>
+                            <ActivityCell v-for="item in activitys.filter(x => x.person_id === person.id)"
+                                :activity="item.name" :description="item.description" />
                         </td>
                     </tr>
                 </tbody>
