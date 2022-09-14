@@ -13,7 +13,7 @@ create TABLE person(
     --Вероисповедание
     religion VARCHAR(16) NOT NULL,
     --Происхождение
-    origin VARCHAR(16) NOT NULL,
+    origin VARCHAR(64) NOT NULL,
     --Уровень образования
     level_education VARCHAR(16) NOT NULL,
     --Учебное учреждение
